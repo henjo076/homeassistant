@@ -27,12 +27,12 @@ condition: []
 action:
   - if:
       - condition: time
-          after: '05:00:00'
-          before: '22:00:00'
+        after: !input on_time
+        before: !input off_time
       then:
         - type: turn_on
-          device_id: !input target_light        
+          device_id: !input target_light
       else:
         - type: turn_off
-          device_id: !input target_light  
+          device_id: !input target_light
 mode: single

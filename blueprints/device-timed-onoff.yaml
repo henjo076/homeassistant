@@ -1,0 +1,38 @@
+blueprint:
+  name: Device timed on off
+  description: Keeps a device on and off at specified time
+  domain: automation
+  input:
+    target_device:
+      name: Target device
+      selector:
+        target:
+          entity:
+            domain: light
+    on_time:
+      name: On time
+      selector:
+        time:
+    off_time:
+      name: Off time
+      selector:
+        time:
+    
+alias: Växtslinga
+description: ""
+trigger:
+  - platform: time
+    at: "00:00:00"
+condition: []
+action:
+  - if:
+    - condition: time
+        after: !input on_time
+        before: !input off_time
+    then:
+      - type: turn_on
+        device_id: !input target_light        
+    else:
+      - type: turn_off
+        device_id: !input target_light  
+mode: single
